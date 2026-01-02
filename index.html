@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>We'll Be Right Back – Maintenance Mode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap and Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: #1f2937;
+      color: #f8f9fa;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 3rem;
+    }
+
+    .tool-icon {
+      font-size: 5rem;
+      color: #f39c12;
+      animation: spin 3s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .game-container {
+      margin-top: 3rem;
+    }
+
+    .word-box {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #0dcaf0;
+      margin-bottom: 1rem;
+    }
+
+    .input-word {
+      font-size: 1.5rem;
+      padding: 0.5rem;
+      width: 300px;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .scoreboard {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+      .contact-info-card {
+    height: calc(100% - 30px); /* Subtracting bottom margin */
+    margin-bottom: 30px;
+  }
+  
+  /* Make contact icons more prominent */
+  .contact-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 25px;
+  }
+  
+  /* Ensure buttons are consistent */
+  .contact-info-card .btn {
+    border-width: 2px;
+    font-weight: 600;
+  }
+  
+  /* Improve spacing in the business hours section */
+  .contact-info-card .row.mt-3 {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="tool-icon mb-4">
+      <i class="fas fa-tools"></i>
+    </div>
+
+    <h1>We're Performing Some Maintenance</h1>
+    <p class="lead">Our team is hard at work fixing things under the hood. Meanwhile, help us out by testing your typing speed below ⌨️</p>
+
+    <div class="game-container">
+      <div class="word-box" id="wordBox">loading...</div>
+      <input type="text" class="form-control input-word" id="wordInput" placeholder="Type the word...">
+      <div class="scoreboard">
+        Score: <span id="score">0</span> |
+        Time Left: <span id="time">30</span>s
+      </div>
+      <div id="endMessage" class="mt-3 fw-bold text-success d-none">Nice work! 👏</div>
+    </div>
+
+    <footer>
+      &copy; 2025 YourCompany. All systems will be back soon. Stay awesome!
+    </footer>
+  </div>
+
+  <script>
+    const words = ['maintenance', 'typing', 'website', 'server', 'update', 'database', 'frontend', 'backend', 'code', 'fixing', 'refresh', 'status', 'monitoring', 'deploy', 'script'];
+    let currentWord = '';
+    let score = 0;
+    let time = 30;
+    let timerInterval;
+
+    const wordBox = document.getElementById('wordBox');
+    const wordInput = document.getElementById('wordInput');
+    const scoreDisplay = document.getElementById('score');
+    const timeDisplay = document.getElementById('time');
+    const endMessage = document.getElementById('endMessage');
+
+    function newWord() {
+      currentWord = words[Math.floor(Math.random() * words.length)];
+      wordBox.innerText = currentWord;
+      wordInput.value = '';
+    }
+
+    function startGame() {
+      newWord();
+      wordInput.focus();
+      timerInterval = setInterval(() => {
+        time--;
+        timeDisplay.innerText = time;
+        if (time <= 0) {
+          clearInterval(timerInterval);
+          wordInput.disabled = true;
+          endMessage.classList.remove('d-none');
+        }
+      }, 1000);
+    }
+
+    wordInput.addEventListener('input', () => {
+      if (wordInput.value.trim().toLowerCase() === currentWord.toLowerCase()) {
+        score++;
+        scoreDisplay.innerText = score;
+        newWord();
+      }
+    });
+
+    window.onload = startGame;
+  </script>
+
+</body>
+</html>
