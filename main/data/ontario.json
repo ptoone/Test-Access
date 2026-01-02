@@ -1,0 +1,492 @@
+[
+  {
+    "id": "on-0001",
+    "organization": "Access Alliance Multicultural Health and Community Services",
+    "address": "340 College Street",
+    "city": "Toronto",
+    "service_area": "City of Toronto (Immigrants, refugees, and their communities)",
+    "website": "https://accessalliance.ca/",
+    "latitude": 43.6575,
+    "longitude": -79.4002
+  },
+  {
+    "id": "on-0002",
+    "organization": "Anishnawbe Health Toronto",
+    "address": "225 Queen Street East",
+    "city": "Toronto",
+    "service_area": "Toronto (Indigenous population)",
+    "website": "https://aht.ca/",
+    "latitude": 43.6552,
+    "longitude": -79.3694
+  },
+  {
+    "id": "on-0003",
+    "organization": "Bay Centre for Birth Control",
+    "address": "790 Bay Street",
+    "city": "Toronto",
+    "service_area": "Greater Toronto Area (Women's reproductive health)",
+    "website": "https://www.womenscollegehospital.ca/care-programs/bay-centre-for-birth-control/",
+    "latitude": 43.6599,
+    "longitude": -79.3853
+  },
+  {
+    "id": "on-0004",
+    "organization": "Birth Control & VD Information Centre (Hassle Free Clinic)",
+    "address": "2828 Bathurst Street",
+    "city": "Toronto",
+    "service_area": "Toronto (Sexual health education)",
+    "website": "https://www.hasslefreeclinic.org/",
+    "latitude": 43.7154,
+    "longitude": -79.4323
+  },
+  {
+    "id": "on-0005",
+    "organization": "Carlington Community Health Centre",
+    "address": "900 Merivale Road",
+    "city": "Ottawa",
+    "service_area": "Carlington Area (Ottawa)",
+    "website": "https://www.carlingtonchc.org/",
+    "latitude": 45.3852,
+    "longitude": -75.7324
+  },
+  {
+    "id": "on-0006",
+    "organization": "Central Community Health Centre",
+    "address": "359 Talbot Street",
+    "city": "St. Thomas",
+    "service_area": "St. Thomas, Central Elgin & Southwold",
+    "website": "https://www.centralchc.com/",
+    "latitude": 42.7794,
+    "longitude": -81.1963
+  },
+  {
+    "id": "on-0007",
+    "organization": "Centre de santé communautaire de l’Estrie",
+    "address": "872 Principale Street",
+    "city": "Casselman",
+    "service_area": "Eastern Ontario (Francophone population)",
+    "website": "https://www.cscestrie.on.ca/",
+    "latitude": 45.3132,
+    "longitude": -75.0845
+  },
+  {
+    "id": "on-0008",
+    "organization": "Centre de santé communautaire du Grand Sudbury",
+    "address": "19 Frood Road",
+    "city": "Sudbury",
+    "service_area": "Greater Sudbury (Francophone population)",
+    "website": "https://cscgs.ca/",
+    "latitude": 46.4924,
+    "longitude": -81.0001
+  },
+  {
+    "id": "on-0009",
+    "organization": "Centre francophone de Toronto",
+    "address": "555 Richmond Street West",
+    "city": "Toronto",
+    "service_area": "Greater Toronto Area (Francophone population)",
+    "website": "https://www.centrefranco.org/",
+    "latitude": 43.6473,
+    "longitude": -79.4005
+  },
+  {
+    "id": "on-0010",
+    "organization": "Centretown Community Health Centre",
+    "address": "420 Cooper Street",
+    "city": "Ottawa",
+    "service_area": "Centretown, Ottawa",
+    "website": "https://www.centretownchc.org/",
+    "latitude": 45.4184,
+    "longitude": -75.6953
+  },
+  {
+    "id": "on-0011",
+    "organization": "Chatham-Kent Health Unit",
+    "address": "435 Grand Avenue West",
+    "city": "Chatham",
+    "service_area": "Municipality of Chatham-Kent",
+    "website": "https://ckphu.com/",
+    "latitude": 42.4173,
+    "longitude": -82.2035
+  },
+  {
+    "id": "on-0012",
+    "organization": "City of Hamilton (Public Health Services)",
+    "address": "110 King Street West",
+    "city": "Hamilton",
+    "service_area": "City of Hamilton",
+    "website": "https://www.hamilton.ca/public-health",
+    "latitude": 43.2574,
+    "longitude": -79.8732
+  },
+  {
+    "id": "on-0013",
+    "organization": "Davenport-Perth Community Health Centre",
+    "address": "1900 Davenport Road",
+    "city": "Toronto",
+    "service_area": "Davenport-Perth Neighborhood",
+    "website": "https://dpnchc.com/",
+    "latitude": 43.6734,
+    "longitude": -79.4532
+  },
+  {
+    "id": "on-0014",
+    "organization": "Eastern Ontario Health Unit",
+    "address": "1000 Pitt Street",
+    "city": "Cornwall",
+    "service_area": "Cornwall, Prescott-Russell, Stormont-Dundas-Glengarry",
+    "website": "https://eohu.ca/",
+    "latitude": 45.0263,
+    "longitude": -74.7402
+  },
+  {
+    "id": "on-0015",
+    "organization": "Elgin-St. Thomas Public Health",
+    "address": "1230 Talbot Street",
+    "city": "St. Thomas",
+    "service_area": "Elgin County & St. Thomas",
+    "website": "https://www.swpublichealth.ca/",
+    "latitude": 42.7842,
+    "longitude": -81.1824
+  },
+  {
+    "id": "on-0016",
+    "organization": "Grey Bruce Health Unit",
+    "address": "101 17th Street East",
+    "city": "Owen Sound",
+    "service_area": "Grey and Bruce Counties",
+    "website": "https://www.publichealthgreybruce.on.ca/",
+    "latitude": 44.5775,
+    "longitude": -80.9334
+  },
+  {
+    "id": "on-0017",
+    "organization": "Haldimand-Norfolk Health Unit",
+    "address": "12 Gilbertson Drive",
+    "city": "Simcoe",
+    "service_area": "Haldimand and Norfolk Counties",
+    "website": "https://hnhu.org/",
+    "latitude": 42.8443,
+    "longitude": -80.2985
+  },
+  {
+    "id": "on-0018",
+    "organization": "Haliburton, Kawartha, Pine Ridge District Health Unit",
+    "address": "200 Rose Glen Road",
+    "city": "Port Hope",
+    "service_area": "Haliburton, Kawartha Lakes, Northumberland",
+    "website": "https://www.hkpr.on.ca/",
+    "latitude": 43.9572,
+    "longitude": -78.3075
+  },
+  {
+    "id": "on-0019",
+    "organization": "Halton Region Health Department",
+    "address": "1151 Bronte Road",
+    "city": "Oakville",
+    "service_area": "Halton Region",
+    "website": "https://www.halton.ca/For-Residents/Public-Health",
+    "latitude": 43.4201,
+    "longitude": -79.7404
+  },
+  {
+    "id": "on-0020",
+    "organization": "Hastings Prince Edward Public Health",
+    "address": "179 North Park Street",
+    "city": "Belleville",
+    "service_area": "Hastings and Prince Edward Counties",
+    "website": "https://hpepublichealth.ca/",
+    "latitude": 44.1853,
+    "longitude": -77.3875
+  },
+  {
+    "id": "on-0021",
+    "organization": "Northeastern Health Unit (Timiskaming)",
+    "address": "247 Whitewood Avenue",
+    "city": "New Liskeard",
+    "service_area": "Timiskaming District",
+    "website": "https://www.timiskaminghu.com/",
+    "latitude": 47.5092,
+    "longitude": -79.6805
+  },
+  {
+    "id": "on-0022",
+    "organization": "Northeastern Health Unit (Porcupine)",
+    "address": "169 Pine Street South",
+    "city": "Timmins",
+    "service_area": "Cochrane District & Hornepayne",
+    "website": "https://www.porcupinehu.on.ca/",
+    "latitude": 48.4735,
+    "longitude": -81.3302
+  },
+  {
+    "id": "on-0023",
+    "organization": "Northwestern Health Unit",
+    "address": "21 Wolsley Street",
+    "city": "Kenora",
+    "service_area": "Kenora & Rainy River Districts",
+    "website": "https://www.nwhu.on.ca/",
+    "latitude": 49.7681,
+    "longitude": -94.4932
+  },
+  {
+    "id": "on-0024",
+    "organization": "Ottawa Inner City Health",
+    "address": "500 Old St. Patrick Street",
+    "city": "Ottawa",
+    "service_area": "Ottawa (Homeless/vulnerable populations)",
+    "website": "https://www.ottawainnercityhealth.ca/",
+    "latitude": 45.4312,
+    "longitude": -75.6885
+  },
+  {
+    "id": "on-0025",
+    "organization": "Ottawa Public Health",
+    "address": "100 Constellation Drive",
+    "city": "Ottawa",
+    "service_area": "City of Ottawa",
+    "website": "https://www.ottawapublichealth.ca/",
+    "latitude": 45.3453,
+    "longitude": -75.7615
+  },
+  {
+    "id": "on-0026",
+    "organization": "Ottawa Valley Midwives",
+    "address": "130 Lansdowne Avenue",
+    "city": "Carleton Place",
+    "service_area": "Lanark County & West Ottawa",
+    "website": "https://ottawavalleymidwives.com/",
+    "latitude": 45.1325,
+    "longitude": -76.1553
+  },
+  {
+    "id": "on-0027",
+    "organization": "Parkdale Queen West CHC",
+    "address": "1229 Queen Street West",
+    "city": "Toronto",
+    "service_area": "Parkdale & Queen West Area",
+    "website": "https://pqwchc.org/",
+    "latitude": 43.6425,
+    "longitude": -79.4302
+  },
+  {
+    "id": "on-0028",
+    "organization": "Peel Public Health",
+    "address": "7120 Hurontario Street",
+    "city": "Mississauga",
+    "service_area": "Peel Region",
+    "website": "https://www.peelregion.ca/health/",
+    "latitude": 43.6392,
+    "longitude": -79.7153
+  },
+  {
+    "id": "on-0029",
+    "organization": "Pinecrest-Queensway CHC",
+    "address": "1365 Richmond Road",
+    "city": "Ottawa",
+    "service_area": "Pinecrest-Queensway Area",
+    "website": "https://www.pqchc.com/",
+    "latitude": 45.3675,
+    "longitude": -75.7942
+  },
+  {
+    "id": "on-0030",
+    "organization": "Durham Region Health Department",
+    "address": "605 Rossland Road East",
+    "city": "Whitby",
+    "service_area": "Durham Region",
+    "website": "https://www.durham.ca/en/health-and-wellness/health-and-wellness.aspx",
+    "latitude": 43.8965,
+    "longitude": -78.9284
+  },
+  {
+    "id": "on-0031",
+    "organization": "York Region Public Health",
+    "address": "17250 Yonge Street",
+    "city": "Newmarket",
+    "service_area": "York Region",
+    "website": "https://www.york.ca/health",
+    "latitude": 44.0485,
+    "longitude": -79.4802
+  },
+  {
+    "id": "on-0032",
+    "organization": "Niagara Region Public Health",
+    "address": "1815 Sir Isaac Brock Way",
+    "city": "Thorold",
+    "service_area": "Niagara Region",
+    "website": "https://www.niagararegion.ca/health/",
+    "latitude": 43.1184,
+    "longitude": -79.2485
+  },
+  {
+    "id": "on-0033",
+    "organization": "Rexdale Community Health Centre",
+    "address": "8 Taber Road",
+    "city": "Toronto",
+    "service_area": "North Etobicoke",
+    "website": "http://www.rexdalechc.com/",
+    "latitude": 43.7225,
+    "longitude": -79.5693
+  },
+  {
+    "id": "on-0034",
+    "organization": "Sages Femmes Rouge Valley Midwives",
+    "address": "6758 Kingston Road",
+    "city": "Toronto",
+    "service_area": "Scarborough, Ajax, Pickering, and Whitby",
+    "website": "https://sagesfemmesrougevalleymidwives.com/",
+    "latitude": 43.8052,
+    "longitude": -79.1335
+  },
+  {
+    "id": "on-0035",
+    "organization": "Sandy Hill Community Health Centre",
+    "address": "221 Nelson Street",
+    "city": "Ottawa",
+    "service_area": "Sandy Hill & Strathcona Heights",
+    "website": "https://www.sandyhillchc.on.ca/",
+    "latitude": 45.4285,
+    "longitude": -75.6842
+  },
+  {
+    "id": "on-0036",
+    "organization": "Simcoe Muskoka District Health Unit",
+    "address": "15 Sperling Drive",
+    "city": "Barrie",
+    "service_area": "County of Simcoe & District of Muskoka",
+    "website": "http://www.simcoemuskokahealth.org/",
+    "latitude": 44.4135,
+    "longitude": -79.6682
+  },
+  {
+    "id": "on-0037",
+    "organization": "Somerset West Community Health Centre",
+    "address": "55 Eccles Street",
+    "city": "Ottawa",
+    "service_area": "Somerset West Catchment",
+    "website": "http://www.swchc.on.ca/",
+    "latitude": 45.4082,
+    "longitude": -75.7105
+  },
+  {
+    "id": "on-0038",
+    "organization": "KFL&A Public Health",
+    "address": "221 Portsmouth Avenue",
+    "city": "Kingston",
+    "service_area": "Kingston, Frontenac, Lennox & Addington",
+    "website": "http://www.kflaph.ca/",
+    "latitude": 44.2325,
+    "longitude": -76.5293
+  },
+  {
+    "id": "on-0039",
+    "organization": "South-East Ottawa Community Health Centre",
+    "address": "1355 Bank Street",
+    "city": "Ottawa",
+    "service_area": "South-East Ottawa",
+    "website": "http://www.seochc.on.ca/",
+    "latitude": 45.3835,
+    "longitude": -75.6762
+  },
+  {
+    "id": "on-0040",
+    "organization": "Public Health Sudbury & Districts",
+    "address": "1300 Paris Street",
+    "city": "Sudbury",
+    "service_area": "Greater Sudbury, Sudbury & Manitoulin Districts",
+    "website": "https://www.phsd.ca/",
+    "latitude": 46.4675,
+    "longitude": -80.9942
+  },
+  {
+    "id": "on-0041",
+    "organization": "Thunder Bay District Health Unit",
+    "address": "999 Balmoral Street",
+    "city": "Thunder Bay",
+    "service_area": "Thunder Bay District",
+    "website": "http://www.tbdhu.com/",
+    "latitude": 48.4025,
+    "longitude": -89.2675
+  },
+  {
+    "id": "on-0042",
+    "organization": "Toronto Public Health",
+    "address": "277 Victoria Street",
+    "city": "Toronto",
+    "service_area": "City of Toronto",
+    "website": "http://www.toronto.ca/health",
+    "latitude": 43.6565,
+    "longitude": -79.3792
+  },
+  {
+    "id": "on-0043",
+    "organization": "Transitions for Youth (Centre for Skills)",
+    "address": "3365 Harvester Road",
+    "city": "Burlington",
+    "service_area": "Halton Region",
+    "website": "https://www.thecentre.on.ca/",
+    "latitude": 43.3752,
+    "longitude": -79.7825
+  },
+  {
+    "id": "on-0044",
+    "organization": "Wabano Centre for Aboriginal Health",
+    "address": "299 Montreal Road",
+    "city": "Vanier",
+    "service_area": "Ottawa & Region (Indigenous focus)",
+    "website": "http://www.wabano.com/",
+    "latitude": 45.4355,
+    "longitude": -75.6632
+  },
+  {
+    "id": "on-0045",
+    "organization": "Waasegiizhig Nanaandawe’iyewigamig",
+    "address": "4th Avenue South",
+    "city": "Kenora",
+    "service_area": "Kenora Area & Surrounding First Nations",
+    "website": "https://www.wnhac.org/",
+    "latitude": 49.7655,
+    "longitude": -94.4925
+  },
+  {
+    "id": "on-0046",
+    "organization": "Wellington-Dufferin-Guelph Health Unit",
+    "address": "8460 Wellington Road #19",
+    "city": "Belwood",
+    "service_area": "Wellington, Dufferin & Guelph",
+    "website": "https://www.wdgpublichealth.ca/",
+    "latitude": 43.7905,
+    "longitude": -80.3402
+  },
+  {
+    "id": "on-0047",
+    "organization": "Windsor Regional Hospital (Met Campus)",
+    "address": "1995 Lens Avenue",
+    "city": "Windsor",
+    "service_area": "Windsor-Essex Region",
+    "website": "https://www.wrh.on.ca/",
+    "latitude": 42.2985,
+    "longitude": -82.9962
+  },
+  {
+    "id": "on-0048",
+    "organization": "Windsor-Essex County Health Unit",
+    "address": "1005 Ouellette Avenue",
+    "city": "Windsor",
+    "service_area": "Windsor & Essex County",
+    "website": "https://www.wechu.org/",
+    "latitude": 42.3082,
+    "longitude": -83.0335
+  },
+  {
+    "id": "on-0049",
+    "organization": "Women’s Health in Women’s Hands",
+    "address": "2 Carlton Street",
+    "city": "Toronto",
+    "service_area": "Toronto & Surrounding Area (Women's health focus)",
+    "website": "http://whiwh.com/",
+    "latitude": 43.6615,
+    "longitude": -79.3822
+  }
+]
