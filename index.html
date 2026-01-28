@@ -34,18 +34,60 @@
   />
 
   <style>
-    body { background: #f8fafb; }
-    .hero {
-      background: linear-gradient(135deg, #00b46f 0%, #008f82 60%, #00698f 100%);
-      color: #fff;
+    :root{
+      --accent: #00b46f;
+      --bg: #f8fafb;
+      --card: rgba(255,255,255,.96);
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: rgba(15,23,42,.10);
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --hero-grad: linear-gradient(135deg, #00b46f 0%, #008f82 60%, #00698f 100%);
     }
+
+    body { background: var(--bg); color: var(--text); }
+
+    /* Dark theme */
+    body.theme-dark{
+      --bg: #0b1220;
+      --card: rgba(17,24,39,.85);
+      --text: #e5e7eb;
+      --muted: rgba(229,231,235,.70);
+      --border: rgba(255,255,255,.12);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --hero-grad: linear-gradient(135deg, rgba(0,180,111,.85) 0%, rgba(0,143,130,.85) 55%, rgba(0,105,143,.85) 100%);
+    }
+
+    /* Make bootstrap elements look good in dark mode without rebuilding everything */
+    body.theme-dark .navbar.bg-dark { background: #060a12 !important; }
+    body.theme-dark .card { background: var(--card); border-color: var(--border); }
+    body.theme-dark .card-header { background: rgba(0,0,0,.12); border-color: var(--border); color: var(--text); }
+    body.theme-dark .form-control, body.theme-dark .form-select, body.theme-dark textarea.form-control{
+      background: rgba(0,0,0,.20);
+      border-color: var(--border);
+      color: var(--text);
+    }
+    body.theme-dark .form-control::placeholder{ color: rgba(229,231,235,.55); }
+    body.theme-dark .list-group-item{
+      background: rgba(0,0,0,.18);
+      border-color: var(--border);
+      color: var(--text);
+    }
+    body.theme-dark .text-muted, body.theme-dark .small.text-muted{ color: var(--muted) !important; }
+    body.theme-dark a{ color: rgba(125,211,252,.95); }
+    body.theme-dark code{ color: rgba(229,231,235,.9); }
+
+    .hero { background: var(--hero-grad); color: #fff; }
     #map {
       width: 100%;
       height: min(72vh, 760px);
       border-radius: 14px;
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.03);
     }
+
     .searchbar {
       border-radius: 999px;
       padding-left: 1.1rem;
@@ -55,20 +97,20 @@
     }
     .pill-btn { border-radius: 999px; }
     .small-muted { color: rgba(255,255,255,0.85); }
+
     .badge-soft {
-      background: rgba(0, 180, 111, 0.12);
-      color: #067a53;
-      border: 1px solid rgba(0, 180, 111, 0.18);
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      color: color-mix(in srgb, var(--accent) 75%, #000 25%);
+      border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
     }
-    .result-item:hover { background: #f7fafc; }
+
+    .result-item:hover { background: rgba(148,163,184,.18); }
+
     .sticky-controls { position: sticky; top: 12px; z-index: 5; }
+
     pre, code, textarea.form-control {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
-
-    /* Embed-only tweaks get applied via JS (also safe here as defaults) */
-    body.embed-mode { background: transparent; margin: 0; }
-    body.embed-mode #map { border-radius: 0; height: 80vh; box-shadow: none; }
 
     /* Scrollable results list (desktop + mobile friendly) */
     .results-scroll{
@@ -77,35 +119,74 @@
       scrollbar-gutter: stable;
       border-radius: 12px;
       overscroll-behavior: contain;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.65);
+    }
+    body.theme-dark .results-scroll{
+      background: rgba(0,0,0,.12);
     }
 
-    /* Desktop: let the list scroll within the visible area */
     @media (min-width: 992px){
-      .results-scroll{
-        max-height: calc(72vh - 140px); /* map height-ish minus header/padding */
-      }
+      .results-scroll{ max-height: calc(72vh - 140px); }
     }
-
-    /* Mobile/tablet: no sticky (better UX), give list its own scroll area */
     @media (max-width: 991.98px){
       .sticky-controls{ position: static; top: auto; }
-      .results-scroll{
-        max-height: 52vh;
-      }
+      .results-scroll{ max-height: 52vh; }
     }
 
-    /* Slightly larger tap targets + clean look while scrolling */
     #results .list-group-item{
       padding-top: .85rem;
       padding-bottom: .85rem;
-      background: #fff;
+      background: transparent;
+    }
+
+    /* Embed mode */
+    body.embed-mode{
+      background: transparent;
+      margin: 0;
+    }
+    body.embed-mode #map{
+      border-radius: 0;
+      height: 80vh;
+      box-shadow: none;
+    }
+    body.embed-mode .container{
+      max-width: 100% !important;
+      padding-left: 12px !important;
+      padding-right: 12px !important;
+    }
+
+    /* Hide blocks via class (driven by query params) */
+    .hide { display: none !important; }
+
+    /* Accent buttons (no need to fight bootstrap themes) */
+    .btn-accent{
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .btn-accent:hover{
+      filter: brightness(0.95);
+      color:#fff;
+    }
+    .btn-outline-accent{
+      border-color: color-mix(in srgb, var(--accent) 60%, #000 40%);
+      color: color-mix(in srgb, var(--accent) 75%, #000 25%);
+      background: transparent;
+    }
+    body.theme-dark .btn-outline-accent{
+      border-color: color-mix(in srgb, var(--accent) 70%, #fff 30%);
+      color: color-mix(in srgb, var(--accent) 85%, #fff 15%);
+    }
+    .btn-outline-accent:hover{
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
     }
   </style>
 </head>
 
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav id="topNav" class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="#">Test Access</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -116,7 +197,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="#mapSection">Map</a></li>
-          <li class="nav-item"><a class="nav-link" href="#embed">Embed</a></li>
+          <li class="nav-item"><a class="nav-link" href="#embed" id="embedNavLink">Embed</a></li>
           <li class="nav-item"><a class="nav-link" href="https://github.com/ptoone/Test-Access" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
       </div>
@@ -124,7 +205,7 @@
   </nav>
 
   <!-- Hero -->
-  <section class="hero py-5">
+  <section id="hero" class="hero py-5">
     <div class="container">
       <div class="row align-items-center g-4">
         <div class="col-lg-7">
@@ -136,12 +217,13 @@
             Privacy-first: your searches stay in your browser. Always confirm hours and service details before visiting.
           </p>
 
-          <div class="bg-white text-dark rounded-4 shadow-sm p-3 p-md-4">
+          <!-- Controls wrapper (can be hidden via ?search=0 or ?controls=0) -->
+          <div id="controlsWrap" class="bg-white text-dark rounded-4 shadow-sm p-3 p-md-4">
             <div class="d-flex flex-column flex-md-row gap-2">
               <input id="postcodeInput" class="form-control searchbar"
                      placeholder="Enter an Ontario postal code (e.g. M5V 2T6) or town/city"
                      autocomplete="postal-code" inputmode="text">
-              <button id="searchBtn" class="btn btn-success pill-btn px-4" type="button">
+              <button id="searchBtn" class="btn btn-accent pill-btn px-4" type="button">
                 Search
               </button>
               <button id="showAllBtn" class="btn btn-outline-secondary pill-btn px-4" type="button">
@@ -204,11 +286,11 @@
     </div>
   </section>
 
-  <main class="container py-4 pb-5">
+  <main id="mainWrap" class="container py-4 pb-5">
 
     <section id="mapSection" class="mt-2">
-      <div class="row g-4">
-        <div class="col-lg-8">
+      <div id="mapRow" class="row g-4">
+        <div id="mapCol" class="col-lg-8">
           <div id="map" aria-label="Map of locations"></div>
           <div class="d-flex justify-content-between align-items-center mt-2 small text-muted">
             <div>
@@ -220,14 +302,14 @@
           </div>
         </div>
 
-        <div class="col-lg-4">
+        <div id="resultsCol" class="col-lg-4">
           <div class="card shadow-sm sticky-controls">
             <div class="card-header fw-semibold d-flex justify-content-between align-items-center">
               <span>Nearby locations</span>
               <span class="badge text-bg-secondary" id="countBadge">0</span>
             </div>
             <div class="card-body">
-              <div class="results-scroll border">
+              <div class="results-scroll">
                 <div id="results" class="list-group list-group-flush"></div>
               </div>
 
@@ -272,7 +354,7 @@
       </div>
     </section>
 
-    <div class="text-center text-muted small mt-4">
+    <div id="footerLine" class="text-center text-muted small mt-4">
       Built with <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a> and
       <a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a>.
       Please verify services before visiting.
@@ -298,14 +380,102 @@
     /************************************************************
      * CONFIG
      ************************************************************/
-    // Use the non-refs raw URL:
     const DATA_URL = "https://raw.githubusercontent.com/ptoone/Test-Access/main/main/data/ontario.json";
-
     const DEFAULT_CENTER = [50.0, -85.0];
     const DEFAULT_ZOOM = 5;
 
-    // Embed mode: https://testaccess.xyz.am/?embed=1
-    const IS_EMBED = new URLSearchParams(location.search).get("embed") === "1";
+    /************************************************************
+     * QUERY PARAMS (embed options)
+     ************************************************************/
+    const qs = new URLSearchParams(location.search);
+
+    const IS_EMBED = qs.get("embed") === "1";
+
+    // theme: light | dark | auto (default auto)
+    const THEME = (qs.get("theme") || "auto").toLowerCase();
+
+    // tiles: osm | carto_light | carto_dark
+    const TILES = (qs.get("tiles") || "osm").toLowerCase();
+
+    // accent: hex like "00b46f" or "#00b46f"
+    const ACCENT_RAW = (qs.get("accent") || "").trim();
+    const ACCENT = ACCENT_RAW.replace("#","").match(/^[0-9a-fA-F]{6}$/) ? ("#" + ACCENT_RAW.replace("#","")) : null;
+
+    // UI toggles (default to ON)
+    const MAP_ONLY = qs.get("mapOnly") === "1";      // hides panels + makes map full width
+    const SHOW_CONTROLS = qs.get("controls") !== "0"; // affects zoom control + top control block visibility
+    const SHOW_RESULTS = qs.get("results") !== "0";
+    const SHOW_SEARCH = qs.get("search") !== "0";
+
+    /************************************************************
+     * THEME + ACCENT APPLY
+     ************************************************************/
+    (function applyThemeAndAccent(){
+      // Accent
+      if (ACCENT) document.documentElement.style.setProperty("--accent", ACCENT);
+
+      // Theme
+      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const useDark = (THEME === "dark") || (THEME === "auto" && prefersDark);
+      document.body.classList.toggle("theme-dark", !!useDark);
+    })();
+
+    /************************************************************
+     * EMBED/MAP-ONLY UI APPLY
+     ************************************************************/
+    (function applyEmbedUi(){
+      if (IS_EMBED) {
+        document.body.classList.add("embed-mode");
+      }
+
+      if (IS_EMBED || MAP_ONLY) {
+        // Hide nav/hero/embed/footer line
+        const nav = document.getElementById("topNav");
+        const hero = document.getElementById("hero");
+        const embedSec = document.getElementById("embed");
+        const footerLine = document.getElementById("footerLine");
+        const embedNavLink = document.getElementById("embedNavLink");
+        if (nav) nav.classList.add("hide");
+        if (hero) hero.classList.add("hide");
+        if (embedSec) embedSec.classList.add("hide");
+        if (footerLine) footerLine.classList.add("hide");
+        if (embedNavLink) embedNavLink.classList.add("hide");
+
+        // Make map full width
+        const resultsCol = document.getElementById("resultsCol");
+        const mapCol = document.getElementById("mapCol");
+        if (mapCol) {
+          mapCol.classList.remove("col-lg-8");
+          mapCol.classList.add("col-12");
+        }
+        if (resultsCol) resultsCol.classList.add("hide");
+
+        // tighten padding
+        const main = document.getElementById("mainWrap");
+        if (main) {
+          main.classList.remove("py-4", "pb-5");
+          main.style.padding = "12px";
+          main.style.maxWidth = "100%";
+        }
+      } else {
+        // not map-only: allow results toggle
+        if (!SHOW_RESULTS) {
+          const resultsCol = document.getElementById("resultsCol");
+          const mapCol = document.getElementById("mapCol");
+          if (resultsCol) resultsCol.classList.add("hide");
+          if (mapCol) {
+            mapCol.classList.remove("col-lg-8");
+            mapCol.classList.add("col-12");
+          }
+        }
+      }
+
+      // Search UI toggle (control card in hero)
+      if (!SHOW_SEARCH || !SHOW_CONTROLS) {
+        const controlsWrap = document.getElementById("controlsWrap");
+        if (controlsWrap) controlsWrap.classList.add("hide");
+      }
+    })();
 
     /************************************************************
      * HELPERS
@@ -351,39 +521,6 @@
     }
 
     /************************************************************
-     * EMBED MODE UI (hide hero/nav/embed section, keep map)
-     ************************************************************/
-    (function applyEmbedMode(){
-      if (!IS_EMBED) return;
-
-      document.body.classList.add("embed-mode");
-
-      const nav = document.querySelector("nav");
-      if (nav) nav.style.display = "none";
-
-      const hero = document.querySelector(".hero");
-      if (hero) hero.style.display = "none";
-
-      const embedSection = document.querySelector("#embed");
-      if (embedSection) embedSection.style.display = "none";
-
-      const footerLine = document.querySelector("main .text-center.text-muted");
-      if (footerLine) footerLine.style.display = "none";
-
-      // Make main full width / minimal padding
-      const main = document.querySelector("main.container");
-      if (main) {
-        main.classList.remove("py-4", "pb-5");
-        main.style.padding = "12px";
-        main.style.maxWidth = "100%";
-      }
-
-      // Ensure we start at map section
-      const mapSection = document.querySelector("#mapSection");
-      if (mapSection) mapSection.classList.remove("mt-2");
-    })();
-
-    /************************************************************
      * PERMALINKS
      ************************************************************/
     function getBase(){
@@ -398,12 +535,28 @@
       return `${base}#${c.lat.toFixed(5)},${c.lng.toFixed(5)},${z}`;
     }
 
-    // Map-only embed link (embed=1 + hash view)
+    // Embed link includes embed=1 + current options (theme/tiles/accent/ui) + hash view
     function getEmbedPermalink(){
       const c = map.getCenter();
       const z = map.getZoom();
       const base = getBase();
-      return `${base}?embed=1#${c.lat.toFixed(5)},${c.lng.toFixed(5)},${z}`;
+      const u = new URL(base, location.origin);
+
+      u.searchParams.set("embed","1");
+
+      // preserve options so embed builder links stay consistent
+      if (THEME && THEME !== "auto") u.searchParams.set("theme", THEME);
+      if (TILES && TILES !== "osm") u.searchParams.set("tiles", TILES);
+      if (ACCENT) u.searchParams.set("accent", ACCENT.replace("#",""));
+
+      // UI flags (only include when not defaults)
+      u.searchParams.set("mapOnly", (IS_EMBED || MAP_ONLY) ? "1" : "0");
+      u.searchParams.set("controls", SHOW_CONTROLS ? "1" : "0");
+      u.searchParams.set("results", SHOW_RESULTS ? "1" : "0");
+      u.searchParams.set("search", SHOW_SEARCH ? "1" : "0");
+
+      u.hash = `${c.lat.toFixed(5)},${c.lng.toFixed(5)},${z}`;
+      return u.toString();
     }
 
     function applyHashView(){
@@ -424,16 +577,15 @@
       updateHashOnMove._t = setTimeout(() => {
         const c = map.getCenter();
         const z = map.getZoom();
-        // preserve query string (important for ?embed=1)
         history.replaceState(null, "", `${location.pathname}${location.search}#${c.lat.toFixed(5)},${c.lng.toFixed(5)},${z}`);
       }, 250);
     }
 
     /************************************************************
-     * EMBED CODE
+     * EMBED CODE BOX
      ************************************************************/
     function updateEmbedCode(){
-      const url = ($("embedUrl") && $("embedUrl").value.trim()) ? $("embedUrl").value.trim() : "https://testaccess.xyz.am/?embed=1";
+      const url = ($("embedUrl") && $("embedUrl").value.trim()) ? $("embedUrl").value.trim() : getEmbedPermalink();
       if ($("embedCode")) {
         $("embedCode").value =
 `<iframe
@@ -452,13 +604,46 @@
     }
 
     /************************************************************
+     * TILE STYLES
+     ************************************************************/
+    const TILE_STYLES = {
+      osm: {
+        url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        options: {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
+        }
+      },
+      carto_light: {
+        url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+        options: {
+          maxZoom: 20,
+          subdomains: "abcd",
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>'
+        }
+      },
+      carto_dark: {
+        url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+        options: {
+          maxZoom: 20,
+          subdomains: "abcd",
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>'
+        }
+      }
+    };
+
+    function pickTileStyle(){
+      // If tiles=carto_dark but theme is light, still allow it — it’s a deliberate choice.
+      return TILE_STYLES[TILES] || TILE_STYLES.osm;
+    }
+
+    /************************************************************
      * LEAFLET MAP
      ************************************************************/
-    const map = L.map("map", { zoomControl: true });
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
-    }).addTo(map);
+    const map = L.map("map", { zoomControl: SHOW_CONTROLS });
+
+    const tileDef = pickTileStyle();
+    L.tileLayer(tileDef.url, tileDef.options).addTo(map);
 
     map.setView(DEFAULT_CENTER, DEFAULT_ZOOM);
     applyHashView();
@@ -477,7 +662,7 @@
     function setOrigin(lat, lng, label){
       clearOrigin();
       originMarker = L.marker([lat,lng]).addTo(map).bindPopup(label || "Search area");
-      radiusCircle = L.circle([lat,lng], { radius: parseInt($("radiusRange").value, 10) * 1000 }).addTo(map);
+      radiusCircle = L.circle([lat,lng], { radius: parseInt($("radiusRange")?.value || "25", 10) * 1000 }).addTo(map);
     }
 
     function setRadiusCircleKm(km){
@@ -528,9 +713,7 @@
         const m = L.marker([loc.latitude, loc.longitude]).bindPopup(popupHtml(loc, distText));
         m.addTo(markersLayer);
 
-        // Keep reference for click-from-list
         loc._marker = m;
-
         bounds.push([loc.latitude, loc.longitude]);
       });
 
@@ -601,7 +784,6 @@
       const q = normalizeQuery(query);
       if (!q) return null;
 
-      // Bias to Ontario/Canada (works for postal codes or city names)
       const enriched = looksLikePostalCode(q)
         ? `${q}, Ontario, Canada`
         : `${q}, Ontario, Canada`;
@@ -621,7 +803,15 @@
         .map(l => ({ ...l, _distanceKm: undefined }));
 
       renderMarkers(list, null);
-      renderResults(list);
+
+      if (SHOW_RESULTS && $("resultsCol") && !$("resultsCol").classList.contains("hide")) {
+        renderResults(list);
+      } else {
+        // still update counts
+        if ($("countBadge")) $("countBadge").textContent = String(list.length);
+        if ($("countInline")) $("countInline").textContent = String(list.length);
+      }
+
       setStatus(`Showing ${list.length} locations.`);
 
       if ($("embedUrl")) $("embedUrl").value = getEmbedPermalink();
@@ -629,7 +819,7 @@
     }
 
     async function runSearchByOrigin(origin){
-      const radiusKm = parseInt($("radiusRange").value, 10);
+      const radiusKm = parseInt($("radiusRange")?.value || "25", 10);
       setOrigin(origin.lat, origin.lng, "Search area");
       setRadiusCircleKm(radiusKm);
 
@@ -645,13 +835,15 @@
 
       list.sort((a,b) => a._distanceKm - b._distanceKm);
 
-      if ($("closestOnly").checked && list.length){
+      const closestOnly = $("closestOnly")?.checked;
+
+      if (closestOnly && list.length){
         renderMarkers([list[0]], origin);
-        renderResults([list[0]]);
+        if (SHOW_RESULTS && $("resultsCol") && !$("resultsCol").classList.contains("hide")) renderResults([list[0]]);
         setStatus("Showing closest location.");
       } else {
         renderMarkers(list, origin);
-        renderResults(list);
+        if (SHOW_RESULTS && $("resultsCol") && !$("resultsCol").classList.contains("hide")) renderResults(list);
         setStatus(`Found ${list.length} within ${radiusKm} km.`);
       }
 
@@ -660,14 +852,16 @@
     }
 
     async function search(){
-      const q = normalizeQuery($("postcodeInput").value);
+      const q = normalizeQuery($("postcodeInput")?.value || "");
 
-      if (!q && !$("useMyLocation").checked){
+      const useMyLocation = $("useMyLocation")?.checked;
+
+      if (!q && !useMyLocation){
         setStatus("Enter a postal code or enable “Use my location”.", true);
         return;
       }
 
-      if ($("useMyLocation").checked){
+      if (useMyLocation){
         setStatus("Getting your location…");
         navigator.geolocation.getCurrentPosition(async (pos) => {
           await runSearchByOrigin({ lat: pos.coords.latitude, lng: pos.coords.longitude });
@@ -691,37 +885,36 @@
     }
 
     /************************************************************
-     * UI EVENTS
+     * UI EVENTS (only wire up if those elements exist)
      ************************************************************/
-    $("radiusRange").addEventListener("input", () => {
-      $("radiusLabel").textContent = $("radiusRange").value;
+    $("radiusRange")?.addEventListener("input", () => {
+      if ($("radiusLabel")) $("radiusLabel").textContent = $("radiusRange").value;
       setRadiusCircleKm(parseInt($("radiusRange").value, 10));
-      // If origin exists, re-run the filter using the same origin marker location:
       if (originMarker){
         const ll = originMarker.getLatLng();
         runSearchByOrigin({ lat: ll.lat, lng: ll.lng });
       }
     });
 
-    $("searchBtn").addEventListener("click", search);
-    $("showAllBtn").addEventListener("click", showAll);
-    $("postcodeInput").addEventListener("keydown", (e) => { if (e.key === "Enter") search(); });
+    $("searchBtn")?.addEventListener("click", search);
+    $("showAllBtn")?.addEventListener("click", showAll);
+    $("postcodeInput")?.addEventListener("keydown", (e) => { if (e.key === "Enter") search(); });
 
-    $("closestOnly").addEventListener("change", () => {
+    $("closestOnly")?.addEventListener("change", () => {
       if (originMarker){
         const ll = originMarker.getLatLng();
         runSearchByOrigin({ lat: ll.lat, lng: ll.lng });
       }
     });
 
-    $("useMyLocation").addEventListener("change", () => {
+    $("useMyLocation")?.addEventListener("change", () => {
       if ($("useMyLocation").checked){
         setStatus("Tip: click Search to use your current location.");
       }
     });
 
     // Share = full page link (no embed param)
-    $("shareBtn").addEventListener("click", async () => {
+    $("shareBtn")?.addEventListener("click", async () => {
       try{
         const link = getPermalink();
         await copyToClipboard(link);
@@ -731,7 +924,7 @@
       }
     });
 
-    // Embed = embed-mode link (?embed=1 + hash)
+    // Embed = embed-mode link (?embed=1 + options + hash)
     function copyEmbedCurrent(){
       const link = getEmbedPermalink();
       if ($("embedUrl")) $("embedUrl").value = link;
@@ -742,15 +935,14 @@
         .catch(() => setStatus("Couldn’t copy embed code.", true));
     }
 
-    $("copyEmbedBtnTop").addEventListener("click", copyEmbedCurrent);
-
-    $("copyEmbedBtn").addEventListener("click", () => {
+    $("copyEmbedBtnTop")?.addEventListener("click", copyEmbedCurrent);
+    $("copyEmbedBtn")?.addEventListener("click", () => {
       copyToClipboard($("embedCode").value)
         .then(() => setStatus("Embed code copied."))
         .catch(() => setStatus("Couldn’t copy embed code.", true));
     });
 
-    if ($("embedUrl")) $("embedUrl").addEventListener("input", updateEmbedCode);
+    $("embedUrl")?.addEventListener("input", updateEmbedCode);
 
     /************************************************************
      * INIT
@@ -762,7 +954,6 @@
         setStatus("Loading data…");
         const data = await fetchLocations();
 
-        // Expect an array of objects with latitude/longitude
         locations = (Array.isArray(data) ? data : []).map(x => ({
           id: x.id,
           organization: x.organization,
@@ -774,17 +965,16 @@
           longitude: (typeof x.longitude === "number") ? x.longitude : parseFloat(x.longitude)
         }));
 
-        // Start by showing all markers (nice first impression)
         await showAll();
 
         // If hash exists, it overrides view
         applyHashView();
 
-        // Keep embed URL in sync
+        // keep embed URL in sync
         if ($("embedUrl")) $("embedUrl").value = getEmbedPermalink();
         updateEmbedCode();
 
-        setStatus("Ready. Search by postal code to filter nearby.");
+        setStatus(IS_EMBED || MAP_ONLY ? "" : "Ready. Search by postal code to filter nearby.");
       } catch (e){
         console.error(e);
         setStatus("Could not load the locations file. Check DATA_URL and JSON validity.", true);
