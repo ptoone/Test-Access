@@ -1,40 +1,48 @@
-🧭 Test Access – HIV Testing Map (Ontario)
+# 🧭 Test Access -- HIV Testing Map (Ontario)
 
-Test Access is a privacy-first, open map that helps people find organizations and clinics that offer HIV testing support across Ontario.
+**Test Access** is a privacy-first, open map that helps people find
+organizations and clinics that offer **HIV testing support** across
+Ontario.
 
-🔎 Search by postal code
-📍 Filter by distance
-🗺 Powered by OpenStreetMap + Leaflet
+🔎 Search by postal code\
+📍 Filter by distance\
+🗺 Powered by OpenStreetMap + Leaflet\
 🔗 Shareable + embeddable
 
-This tool is designed to make access to testing information easier — especially for people who may not know where to start.
+This tool is designed to make access to testing information easier ---
+especially for people who may not know where to start.
 
-🌍 Live Map
+------------------------------------------------------------------------
 
-👉 https://testaccess.xyz.am/
+## 🌍 Live Map
 
-🤝 Contributing Data
+👉 **https://testaccess.xyz.am/**
 
-The most valuable way to contribute is by improving the locations dataset.
+------------------------------------------------------------------------
+
+# 🤝 Contributing Data
+
+The most valuable way to contribute is by improving the **locations
+dataset**.
 
 We welcome additions, corrections, and updates to:
 
-Community organizations
+-   Community organizations\
+-   Clinics\
+-   Mobile or outreach programs\
+-   Support centres that provide HIV testing or referrals
 
-Clinics
+------------------------------------------------------------------------
 
-Mobile or outreach programs
-
-Support centres that provide HIV testing or referrals
-
-📁 Where the Data Lives
+## 📁 Where the Data Lives
 
 All locations are stored in:
 
-main/data/ontario.json
+    main/data/ontario.json
 
 Each entry looks like this:
 
+``` json
 {
   "id": "unique-id",
   "organization": "Organization Name",
@@ -45,39 +53,49 @@ Each entry looks like this:
   "latitude": 43.6532,
   "longitude": -79.3832
 }
-🛠 How to Add or Edit a Location
+```
 
-Fork this repository
+------------------------------------------------------------------------
 
-Edit main/data/ontario.json
+## 🛠 How to Add or Edit a Location
 
-Add or update an entry
+1.  Fork this repository\
+2.  Edit `main/data/ontario.json`\
+3.  Add or update an entry\
+4.  Submit a Pull Request
 
-Submit a Pull Request
+------------------------------------------------------------------------
 
-✅ Data Guidelines
+## ✅ Data Guidelines
 
 To keep the map useful and trustworthy:
 
-✔ Include only real, verifiable services
-✔ Confirm the organization offers testing or referrals
-✔ Use official websites when possible
-✔ Ensure latitude/longitude are accurate
+✔ Include only real, verifiable services\
+✔ Confirm the organization offers testing or referrals\
+✔ Use official websites when possible\
+✔ Ensure latitude/longitude are accurate\
 ✔ Avoid personal contact info unless publicly listed
 
 If you're unsure, open an issue and we can review together.
 
-❗ Important
+------------------------------------------------------------------------
 
-This project does not guarantee service availability.
+## ❗ Important
 
-Always confirm hours, services, and eligibility with the organization directly.
+-   This project does **not guarantee** service availability.\
+-   Always confirm hours, services, and eligibility with the
+    organization directly.
 
-🧩 Embedding the Map
+------------------------------------------------------------------------
 
-You can embed the interactive map only (no header/hero) on any website.
+# 🧩 Embedding the Map
 
-Basic Embed
+You can embed the **interactive map only** (no header/hero) on any
+website.
+
+### Basic Embed
+
+``` html
 <iframe
   src="https://testaccess.xyz.am/?embed=1"
   width="100%"
@@ -85,14 +103,19 @@ Basic Embed
   style="border:0;border-radius:12px;overflow:hidden"
   loading="lazy">
 </iframe>
-Embed with Custom View
+```
+
+------------------------------------------------------------------------
+
+### Embed with Custom View
 
 The map supports a shareable view using coordinates:
 
-#latitude,longitude,zoom
+    #latitude,longitude,zoom
 
 Example:
 
+``` html
 <iframe
   src="https://testaccess.xyz.am/?embed=1#43.6532,-79.3832,11"
   width="100%"
@@ -100,18 +123,35 @@ Example:
   style="border:0;border-radius:12px;overflow:hidden"
   loading="lazy">
 </iframe>
-🔐 Privacy
+```
 
-Searches stay in the user’s browser
+------------------------------------------------------------------------
 
-No tracking scripts
+## 🔐 Privacy
 
-Location data (if enabled) is never stored
+-   Searches stay in the user's browser\
+-   No tracking scripts\
+-   Location data (if enabled) is never stored
 
-⚠️ Disclaimer
+------------------------------------------------------------------------
 
-This map is an informational tool intended to help people find HIV testing resources. It is not medical advice. In emergencies, contact local emergency services.
+## ⚠️ Disclaimer
 
-📬 Questions or Suggestions
+This map is an informational tool intended to help people find HIV
+testing resources. It is not medical advice. In emergencies, contact
+local emergency services.
 
-Open an Issue or Pull Request — community contributions are what make this project better.
+------------------------------------------------------------------------
+
+## 📬 Questions or Suggestions
+
+Open an Issue or Pull Request --- community contributions are what make
+this project better.
+
+------------------------------------------------------------------------
+
+## 📄 License
+
+Usage of this project and its data may be subject to additional terms.
+Please contact the project maintainer for questions about reuse,
+redistribution, or commercial use.
