@@ -65,6 +65,10 @@
     pre, code, textarea.form-control {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
+
+    /* Embed-only tweaks get applied via JS (also safe here as defaults) */
+    body.embed-mode { background: transparent; margin: 0; }
+    body.embed-mode #map { border-radius: 0; height: 80vh; box-shadow: none; }
   </style>
 </head>
 
@@ -214,9 +218,9 @@
 
           <div class="row g-3">
             <div class="col-lg-6">
-              <label class="form-label">Map URL</label>
-              <input id="embedUrl" class="form-control" value="https://testaccess.xyz.am/">
-              <div class="form-text">Tip: the share link includes the current zoom + centre.</div>
+              <label class="form-label">Map URL (embed-mode)</label>
+              <input id="embedUrl" class="form-control" value="https://testaccess.xyz.am/?embed=1">
+              <div class="form-text">Tip: the embed link includes the current zoom + centre.</div>
             </div>
             <div class="col-lg-6">
               <label class="form-label">Embed code</label>
@@ -266,6 +270,9 @@
     const DEFAULT_CENTER = [50.0, -85.0];
     const DEFAULT_ZOOM = 5;
 
+    // Embed mode: https://testaccess.xyz.am/?embed=1
+    const IS_EMBED = new URLSearchParams(location.search).get("embed") === "1";
+
     /************************************************************
      * HELPERS
      ************************************************************/
@@ -273,6 +280,7 @@
 
     function setStatus(msg, isError=false){
       const el = $("statusMsg");
+      if (!el) return; // in embed mode, hero is hidden; but element might still exist (safe)
       el.textContent = msg;
       el.className = "small " + (isError ? "text-danger" : "text-muted");
       if (msg) setTimeout(() => { if (el.textContent === msg) el.textContent = ""; }, 5000);
@@ -309,13 +317,59 @@
     }
 
     /************************************************************
-     * PERMALINK (#lat,lng,zoom)
+     * EMBED MODE UI (hide hero/nav/embed section, keep map)
      ************************************************************/
+    (function applyEmbedMode(){
+      if (!IS_EMBED) return;
+
+      document.body.classList.add("embed-mode");
+
+      const nav = document.querySelector("nav");
+      if (nav) nav.style.display = "none";
+
+      const hero = document.querySelector(".hero");
+      if (hero) hero.style.display = "none";
+
+      const embedSection = document.querySelector("#embed");
+      if (embedSection) embedSection.style.display = "none";
+
+      const footerLine = document.querySelector("main .text-center.text-muted");
+      if (footerLine) footerLine.style.display = "none";
+
+      // Make main full width / minimal padding
+      const main = document.querySelector("main.container");
+      if (main) {
+        main.classList.remove("py-4", "pb-5");
+        main.style.padding = "12px";
+        main.style.maxWidth = "100%";
+      }
+
+      // Ensure we start at map section
+      const mapSection = document.querySelector("#mapSection");
+      if (mapSection) mapSection.classList.remove("mt-2");
+    })();
+
+    /************************************************************
+     * PERMALINKS
+     ************************************************************/
+    function getBase(){
+      return location.origin + location.pathname;
+    }
+
+    // Full-page share link (no embed param)
     function getPermalink(){
       const c = map.getCenter();
       const z = map.getZoom();
-      const base = location.origin + location.pathname;
+      const base = getBase();
       return `${base}#${c.lat.toFixed(5)},${c.lng.toFixed(5)},${z}`;
+    }
+
+    // Map-only embed link (embed=1 + hash view)
+    function getEmbedPermalink(){
+      const c = map.getCenter();
+      const z = map.getZoom();
+      const base = getBase();
+      return `${base}?embed=1#${c.lat.toFixed(5)},${c.lng.toFixed(5)},${z}`;
     }
 
     function applyHashView(){
@@ -336,7 +390,8 @@
       updateHashOnMove._t = setTimeout(() => {
         const c = map.getCenter();
         const z = map.getZoom();
-        history.replaceState(null, "", `#${c.lat.toFixed(5)},${c.lng.toFixed(5)},${z}`);
+        // preserve query string (important for ?embed=1)
+        history.replaceState(null, "", `${location.pathname}${location.search}#${c.lat.toFixed(5)},${c.lng.toFixed(5)},${z}`);
       }, 250);
     }
 
@@ -344,8 +399,9 @@
      * EMBED CODE
      ************************************************************/
     function updateEmbedCode(){
-      const url = $("embedUrl").value.trim() || "https://testaccess.xyz.am/";
-      $("embedCode").value =
+      const url = ($("embedUrl") && $("embedUrl").value.trim()) ? $("embedUrl").value.trim() : "https://testaccess.xyz.am/?embed=1";
+      if ($("embedCode")) {
+        $("embedCode").value =
 `<iframe
   src="${url}"
   width="100%"
@@ -354,6 +410,7 @@
   loading="lazy"
   referrerpolicy="no-referrer-when-downgrade">
 </iframe>`;
+      }
     }
 
     function copyToClipboard(text){
@@ -397,7 +454,7 @@
     /************************************************************
      * DATA
      ************************************************************/
-    $("dataUrlDisplay").textContent = DATA_URL;
+    if ($("dataUrlDisplay")) $("dataUrlDisplay").textContent = DATA_URL;
 
     let locations = [];
 
@@ -452,10 +509,11 @@
 
     function renderResults(list){
       const el = $("results");
+      if (!el) return;
       el.innerHTML = "";
 
-      $("countBadge").textContent = String(list.length);
-      $("countInline").textContent = String(list.length);
+      if ($("countBadge")) $("countBadge").textContent = String(list.length);
+      if ($("countInline")) $("countInline").textContent = String(list.length);
 
       if (!list.length){
         el.innerHTML = `<div class="text-muted small p-2">No results yet. Search by postal code or click “Show All”.</div>`;
@@ -531,7 +589,8 @@
       renderMarkers(list, null);
       renderResults(list);
       setStatus(`Showing ${list.length} locations.`);
-      $("embedUrl").value = getPermalink();
+
+      if ($("embedUrl")) $("embedUrl").value = getEmbedPermalink();
       updateEmbedCode();
     }
 
@@ -562,7 +621,7 @@
         setStatus(`Found ${list.length} within ${radiusKm} km.`);
       }
 
-      $("embedUrl").value = getPermalink();
+      if ($("embedUrl")) $("embedUrl").value = getEmbedPermalink();
       updateEmbedCode();
     }
 
@@ -627,35 +686,37 @@
       }
     });
 
+    // Share = full page link (no embed param)
     $("shareBtn").addEventListener("click", async () => {
       try{
         const link = getPermalink();
         await copyToClipboard(link);
         setStatus("Share link copied.");
-        $("embedUrl").value = link;
-        updateEmbedCode();
       } catch {
         setStatus("Couldn’t copy. Select the URL from the address bar.", true);
       }
     });
 
+    // Embed = embed-mode link (?embed=1 + hash)
     function copyEmbedCurrent(){
-      const link = getPermalink();
-      $("embedUrl").value = link;
+      const link = getEmbedPermalink();
+      if ($("embedUrl")) $("embedUrl").value = link;
       updateEmbedCode();
+
       copyToClipboard($("embedCode").value)
         .then(() => setStatus("Embed code copied."))
         .catch(() => setStatus("Couldn’t copy embed code.", true));
     }
 
     $("copyEmbedBtnTop").addEventListener("click", copyEmbedCurrent);
+
     $("copyEmbedBtn").addEventListener("click", () => {
       copyToClipboard($("embedCode").value)
         .then(() => setStatus("Embed code copied."))
         .catch(() => setStatus("Couldn’t copy embed code.", true));
     });
 
-    $("embedUrl").addEventListener("input", updateEmbedCode);
+    if ($("embedUrl")) $("embedUrl").addEventListener("input", updateEmbedCode);
 
     /************************************************************
      * INIT
@@ -684,7 +745,9 @@
 
         // If hash exists, it overrides view
         applyHashView();
-        $("embedUrl").value = getPermalink();
+
+        // Keep embed URL in sync
+        if ($("embedUrl")) $("embedUrl").value = getEmbedPermalink();
         updateEmbedCode();
 
         setStatus("Ready. Search by postal code to filter nearby.");
