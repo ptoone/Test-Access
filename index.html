@@ -69,6 +69,37 @@
     /* Embed-only tweaks get applied via JS (also safe here as defaults) */
     body.embed-mode { background: transparent; margin: 0; }
     body.embed-mode #map { border-radius: 0; height: 80vh; box-shadow: none; }
+
+    /* Scrollable results list (desktop + mobile friendly) */
+    .results-scroll{
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-gutter: stable;
+      border-radius: 12px;
+      overscroll-behavior: contain;
+    }
+
+    /* Desktop: let the list scroll within the visible area */
+    @media (min-width: 992px){
+      .results-scroll{
+        max-height: calc(72vh - 140px); /* map height-ish minus header/padding */
+      }
+    }
+
+    /* Mobile/tablet: no sticky (better UX), give list its own scroll area */
+    @media (max-width: 991.98px){
+      .sticky-controls{ position: static; top: auto; }
+      .results-scroll{
+        max-height: 52vh;
+      }
+    }
+
+    /* Slightly larger tap targets + clean look while scrolling */
+    #results .list-group-item{
+      padding-top: .85rem;
+      padding-bottom: .85rem;
+      background: #fff;
+    }
   </style>
 </head>
 
@@ -196,7 +227,10 @@
               <span class="badge text-bg-secondary" id="countBadge">0</span>
             </div>
             <div class="card-body">
-              <div id="results" class="list-group list-group-flush"></div>
+              <div class="results-scroll border">
+                <div id="results" class="list-group list-group-flush"></div>
+              </div>
+
               <div class="mt-3 small text-muted">
                 Missing or incorrect info? Contribute on
                 <a href="https://github.com/ptoone/Test-Access" target="_blank" rel="noopener">GitHub</a>.
@@ -280,7 +314,7 @@
 
     function setStatus(msg, isError=false){
       const el = $("statusMsg");
-      if (!el) return; // in embed mode, hero is hidden; but element might still exist (safe)
+      if (!el) return;
       el.textContent = msg;
       el.className = "small " + (isError ? "text-danger" : "text-muted");
       if (msg) setTimeout(() => { if (el.textContent === msg) el.textContent = ""; }, 5000);
