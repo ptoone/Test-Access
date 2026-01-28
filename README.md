@@ -150,8 +150,3 @@ this project better.
 
 ------------------------------------------------------------------------
 
-## 📄 License
-
-Usage of this project and its data may be subject to additional terms.
-Please contact the project maintainer for questions about reuse,
-redistribution, or commercial use.
